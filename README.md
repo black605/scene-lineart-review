@@ -34,10 +34,16 @@ git clone https://github.com/black605/scene-lineart-review ~/.claude/skills/scen
 
 ## 标注脚本
 
-需要 Python 3 和 Pillow（`pip install pillow`），中文字体会自动查找（macOS 用苹方 / 冬青，Linux 用 Noto CJK）。
+需要 Python 3 和 Pillow（`pip install pillow`），macOS / Windows / Linux 通用。
 
 ```bash
 python scripts/annotate.py spec.json
+```
+
+中文字体会自动查找：先用 fontconfig，没有就按各系统常见路径找（macOS 苹方 / 冬青 / 华文黑体，Windows 微软雅黑 / 黑体，Linux Noto CJK / 文泉驿）。都找不到时脚本会提示，这时手动指定：
+
+```bash
+ANNOTATE_FONT=/path/to/font.ttc python scripts/annotate.py spec.json
 ```
 
 spec 示例见 `scripts/annotate.py` 文件头。输出为原图叠加半透明 UI 占位、热区虚线、红框（返工）/ 黄框（后续）编号，底部附结论和逐条说明。
